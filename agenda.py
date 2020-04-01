@@ -128,11 +128,12 @@ def manage():
             print(f"{i[0]} -- {i[4]:15} {i[1]} {i[2]} - {i[3]}")
     
         entry = int(input("Which entry would you like removed?"))
+        print(type(entry))
         print(f"Are you sure you want to remove entry {entry} (y/n)? ")
         confirm = str(input("-->"))
 
         if "y" in confirm.lower():
-            c.execute("DELETE FROM agenda where ID=(?)", (entry))
+            c.execute("DELETE FROM agenda where ID=(?)", (entry,))
             conn.commit()
             more = str(input("Delete more entries (y/n)?"))
             if "y" in more.lower():
@@ -145,7 +146,6 @@ def manage():
     def addEntry():
         c.execute("SELECT ID FROM agenda")
         idNum = c.fetchall()
-        print(type(idNum))
         if not idNum:
             newID = 0
         else:
