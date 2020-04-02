@@ -20,7 +20,7 @@ def start():
         )
 
 def menu():
-    choice = int(input("""Welcome to the agenda!\nChoose one of the following options:
+    choice = int(input("""Choose one of the following options:
     1) View by Date.
     2) View by Course.
     3) View by Status.
@@ -29,15 +29,16 @@ def menu():
     6) Quit.
 -->""")
     )
+    print('\n')
 
     if choice == 1:
-        date()
+        date();print('\n');menu();
     elif choice == 2:
-        course()
+        course();print('\n');menu()
     elif choice == 3:
-        status()
+        status();print('\n');menu()
     elif choice == 4:
-        edit()
+        edit();print('\n');menu()
     elif choice == 5:
         manage()
     elif choice == 6:
