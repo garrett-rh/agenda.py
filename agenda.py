@@ -48,7 +48,6 @@ def menu():
         start()
 
 def date():
-    #fetchall, sort by date, print, then show agenda menu
     c.execute("SELECT * FROM agenda")
     data = c.fetchall()
     dateList = []
@@ -58,7 +57,7 @@ def date():
    
     dateList.sort(key = lambda dateList: dateList[1])
     for i in dateList:
-        print(f"{i[4]:15} {i[1]} {i[2]} - {i[3]}")
+        print(f"{i[4]:15} {i[1]} {i[2]:10} {i[3]}")
 
 def course():
     c.execute("SELECT * FROM agenda")
@@ -70,7 +69,7 @@ def course():
    
     dateList.sort(key = lambda dateList: dateList[2])
     for i in dateList:
-        print(f"{i[4]:15}{i[1]} {i[2]} - {i[3]}")
+        print(f"{i[4]:15}{i[1]} {i[2]:10} {i[3]}")
 
 def status():
     c.execute("SELECT * FROM agenda")
@@ -81,13 +80,13 @@ def status():
         dateList.append(i)
     dateList.sort(key = lambda dateList: dateList[4])
     for i in dateList:
-        print(f"{i[4]:15}{i[1]} {i[2]} - {i[3]}")
+        print(f"{i[4]:15}{i[1]} {i[2]:10} {i[3]}")
 
 def edit():
     c.execute("SELECT * FROM agenda")
     data = c.fetchall()
     for i in data:
-        print(f"{i[0]} -- {i[4]:15}{i[1]} {i[2]} - {i[3]}")
+        print(f"{i[0]} -- {i[4]:15}{i[1]} {i[2]:10} {i[3]}")
 
     editNum = int(input("Enter ID of Entry to Edit: "))
     inputEdit = int(input("""Which input to edit...
@@ -120,13 +119,18 @@ def edit():
         edit()
     conn.commit()
 
+    again = str(input("Would you like to edit another entry?"))
+    if again.lower() in "y":
+        edit()
+    else:
+        pass
 def manage():
     
     def removeEntry():
         c.execute("SELECT * FROM agenda")
         toBeRemoved = c.fetchall()
         for i in toBeRemoved:
-            print(f"{i[0]} -- {i[4]:15} {i[1]} {i[2]} - {i[3]}")
+            print(f"{i[0]} -- {i[4]:15} {i[1]} {i[2]:10} {i[3]}")
     
         entry = int(input("Which entry would you like removed?"))
         print(type(entry))
