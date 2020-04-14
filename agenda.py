@@ -29,7 +29,6 @@ def menu():
     6) Quit.
 -->""")
     )
-    print('\n')
 
     if choice == 1:
         date();input();menu();
@@ -147,6 +146,12 @@ def manage():
         else:
             menu()
 
+    def export():
+        c.execute("SELECT * FROM agenda")
+        with open('/home/garrett/schedule.txt', 'w') as f:
+            for i in c:
+                f.write(f"{i[4]:15} {i[1]} {i[2]:10} {i[3]}\n")
+
     def addEntry():
         c.execute("SELECT ID FROM agenda")
         idNum = c.fetchall()
@@ -167,7 +172,7 @@ def manage():
             addEntry()
         else:
             menu()
-    manageChoice = int(input("1)Add Entry\n2)Remove Entry\n3)Delete Table\n-->"))
+    manageChoice = int(input("1)Add Entry\n2)Remove Entry\n3)Delete Table\n4)Export Table\n-->"))
 
 
     if manageChoice == 1:
@@ -183,8 +188,11 @@ def manage():
             main()
         else:
             manage()
+    elif manageChoice == 4:
+        export()
     else:
         print("Please enter a proper answer")
         manage()
 
-main()
+if __name__ == "__main__":
+    main()
