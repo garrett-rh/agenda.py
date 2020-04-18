@@ -101,6 +101,7 @@ def edit():
 
     if inputEdit == 1:
         new = str(input("Enter new due date: "))
+        new = new.zfill(5)
         c.execute("UPDATE agenda SET date=(?) WHERE ID=(?)",(new,editNum))
     elif inputEdit == 2:
         new = str(input("Enter new course: "))
@@ -161,7 +162,7 @@ def manage():
         else:
             newID = max(idNum); newID = newID[0] + 1
         dueDate  = str(input("Enter due date: "))
-
+        dueDate = dueDate.zfill(5)
         course = str(input("Enter course: "))
         assignment = str(input("Enter assignment: "))
         status = "Unfinished"
