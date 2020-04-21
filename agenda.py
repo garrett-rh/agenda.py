@@ -84,8 +84,10 @@ def status():
 def edit():
     c.execute("SELECT * FROM agenda")
     data = c.fetchall()
+
+    data.sort(key = lambda dateList: dateList[2])
     for i in data:
-        print(f"{i[0]} -- {i[4]:15}{i[1]} {i[2]:10} {i[3]}")
+        print(f"{i[0]:5} -- {i[3]:50}{i[2]:10} {i[1]:10} {i[4]}")
 
     editNum = int(input("Enter ID of Entry to Edit: "))
     inputEdit = int(input("""Which input to edit...
