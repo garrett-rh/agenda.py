@@ -164,7 +164,6 @@ def manage():
         for i in idNum:
             for a in i:
                 idList.append(a)
-                print(idList)
         if 0 not in idList:
                 newID = 0
         else:
