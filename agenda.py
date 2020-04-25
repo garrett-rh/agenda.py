@@ -41,6 +41,8 @@ def menu():
     elif choice == 5:
         manage()
     elif choice == 6:
+        conn.commit()
+        conn.close()
         quit()
     else:
         print("Invalid Choice")
@@ -201,9 +203,9 @@ def manage():
             if "y" in keepUnfinished.lower():
                 c.execute("SELECT * FROM agenda WHERE status != 'Finished'")
                 data = c.fetchall()
+
             else:
                 pass
-    
             c.execute("DELETE FROM agenda")
             conn.commit()
             
@@ -215,8 +217,11 @@ def manage():
                 status text
                 )"""
                 )
-            for i in data:
-                c.execute("INSERT INTO agenda(ID, date, class, assignment, status) VALUES(?,?,?,?,?)", (i[0], i[1], i[2], i[3], i[4]))
+            conn.commit()
+            for a in range(len(data)):
+                deleteID = a
+                (c.execute("INSERT INTO agenda(ID, date, class, assignment, status) VALUES(?,?,?,?,?)", 
+                    (deleteID, data[a][1], data[a][2], data[a][3], data[a][4])))
                 conn.commit()
             print("Database deleted")
             main()
