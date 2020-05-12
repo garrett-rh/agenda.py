@@ -112,14 +112,12 @@ class Manage(Database):
             new_id = 0
             while new_id in [i[0] for i in id_num]:
                 new_id +=1
-
         dueDate = str(input("Enter due date: ")).zfill(5)
         course = str(input("Enter course: "))
         assignment = str(input("Enter assignment: "))
         status = "Unfinished"
         self.c.execute("INSERT INTO agenda(ID, date, class, assignment, status) VALUES(?,?,?,?,?)", (new_id, dueDate, course, assignment, status))
         self.commit()
-
         again = str(input("Would you like to enter another entry?"))
         if "y" in again.lower():
             self.adding_new_entries()
@@ -155,15 +153,14 @@ class Manage(Database):
             self.create_table()
             self.commit()
             for a in all_unfinished_entries:
-                deleteID = a
+                delete_id = a
                 (self.c.execute("INSERT INTO agenda(ID, date, class, assignment, status) VALUES(?,?,?,?,?)",
-                    (deleteID, data[a][1], data[a][2], data[a][3], data[a][4])))
+                    (delete_id, all_unfinished_entries[a][1], all_unfinished_entries[a][2], all_unfinished_entries[a][3], all_unfinished_entries[a][4])))
             self.commit()
             print("Database deleted")
             menu()
         else:
             self.__init__()
-
 
 def menu():
     choice = int(input("""Choose one of the following options
