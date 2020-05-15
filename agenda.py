@@ -139,14 +139,15 @@ def Manage():
                 keep_status_unfinished = str(input("Would you like to keep all items without a status of 'Finished'?"))
                 if "y" in keep_status_unfinished.lower():
                     all_unfinished_entries = db.query("SELECT * FROM agenda WHERE status != 'Finished'")
-                db.execute("DELETE FROM agenda")
-                db.create_table()
-                db.commit()
-                delete_id = -1
-                for a in all_unfinished_entries:
-                    delete_id +=1
-                    db.execute("INSERT INTO agenda(ID, date, class, assignment, status) VALUES(?,?,?,?,?)",(delete_id, a[1], a[2], a[3], a[4]))
-                db.commit()
+                    db.execute("DELETE FROM agenda")
+                    db.commit()
+                    delete_id = -1
+                    for a in all_unfinished_entries:
+                        delete_id +=1
+                        db.execute("INSERT INTO agenda(ID, date, class, assignment, status) VALUES(?,?,?,?,?)",(delete_id, a[1], a[2], a[3], a[4]))
+                else:
+                    db.execute("DELETE FROM agenda")
+                    db.commit()
                 print("Database deleted")
 
 def main():
