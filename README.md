@@ -5,6 +5,7 @@ I have no plans on making a GUI for it because I spend most of my time in the CL
 
 To get this to run on your machine, please run setup.py.
 Follow the following steps after cloning the repo:
+
 	chmod 700 *.py
 	./setup.py
 	Edit the 8th line of agenda.py to match your database location.
